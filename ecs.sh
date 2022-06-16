@@ -78,10 +78,6 @@ checkspeedtest() {
 	mkdir -p speedtest-cli && tar zxvf speedtest.tgz -C ./speedtest-cli/ > /dev/null 2>&1 && chmod a+rx ./speedtest-cli/speedtest
 }
 
-
-#red(){ echo -e "\033[31m\033[01m$1\033[0m"; }
-#yellow(){ echo -e "\033[33m\033[01m$@\033[0m"; }
-#green(){ echo -e "\033[32m\033[01m$1\033[0m"; }
 test_area=("广州电信" "广州联通" "广州移动")
 test_ip=("58.60.188.222" "210.21.196.6" "120.196.165.2")
 TEMP_FILE='ip.test'
@@ -1151,25 +1147,13 @@ function GameTest_Steam() {
 
 trap _exit INT QUIT TERM
 
-_red() {
-#    printf '\033[0;31;31m%b\033[0m' "$1"
-    echo -e "\033[31m\033[01m$@\033[0m"
-}
+_red() { echo -e "\033[31m\033[01m$@\033[0m"; }
 
-_green() {
-#    printf '\033[0;31;32m%b\033[0m' "$1"
-    echo -e "\033[32m\033[01m$@\033[0m"
-}
+_green() { echo -e "\033[32m\033[01m$@\033[0m"; }
 
-_yellow() {
-#    printf '\033[0;31;33m%b\033[0m' "$1"
-    echo -e "\033[33m\033[01m$@\033[0m"
-}
+_yellow() { echo -e "\033[33m\033[01m$@\033[0m"; }
 
-_blue() {
-#    printf '\033[0;31;36m%b\033[0m' "$1"
-    echo -e "\033[36m\033[01m$@\033[0m"
-}
+_blue() { echo -e "\033[36m\033[01m$@\033[0m"; }
 
 _exists() {
     local cmd="$1"
@@ -1625,14 +1609,12 @@ backtrace() {
 }
 
 check_return() {
-  [[ ! -e return.sh ]] && curl -qO https://raw.githubusercontent.com/spiritLHLS/ecs/main/return.sh
-  chmod +x return.sh >/dev/null 2>&1
 
   _green "依次测试电信，联通，移动经过的地区及线路，核心程序来由: ipip.net ，请知悉!" > $TEMP_FILE
   
   for ((a=0;a<${#test_area[@]};a++)); do
     _yellow "\n${test_area[a]} ${test_ip[a]}\n" >> $TEMP_FILE
-    ./return.sh ${test_ip[a]} >> $TEMP_FILE
+    bash <(curl -sSL https://raw.githubusercontent.com/fscarmen/tools/main/return.sh) ${test_ip[a]} >> $TEMP_FILE
   done
 }
 
