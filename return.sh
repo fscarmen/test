@@ -72,9 +72,9 @@ WAN_6=$(expr "$IP_6" : '.*ip\":\"\([^"]*\).*') &&
 COUNTRY_6E=$(expr "$IP_6" : '.*country\":\"\([^"]*\).*') &&
 COUNTRY_6=$(translate "$COUNTRY_6E") &&
 ASNORG_6=$(expr "$IP_6" : '.*asn_org\":\"\([^"]*\).*') &&
-PE_6=$(curl -s6m5 ping6.ping.pe/$IPV6) &&
+PE_6=$(curl -s6m5 ping6.ping.pe/$WAN_6) &&
 COOKIE_6=$(echo $PE_6 | sed "s/.*document.cookie=\"\([^;]\{1,\}\).*/\1/g") &&
-TYPE_6=$(curl -s6m5 --header "cookie: $COOKIE_6" ping6.ping.pe/$IPV6 | grep "id='page-div'" | sed "s/.*\[\(.*\)\].*/\1/g" | sed "s/.*orange'>\([^<]\{1,\}\).*/\1/g" | sed "s/hosting/数据中心/g;s/residential/家庭宽带/g") &&
+TYPE_6=$(curl -s6m5 --header "cookie: $COOKIE_6" ping6.ping.pe/$WAN_6 | grep "id='page-div'" | sed "s/.*\[\(.*\)\].*/\1/g" | sed "s/.*orange'>\([^<]\{1,\}\).*/\1/g" | sed "s/hosting/数据中心/g;s/residential/家庭宽带/g") &&
 green " IPv6: $WAN_6\t 地区: $COUNTRY_6\t ASN: $ASNORG_6\t 类型: $TYPE_6\n"
 
 [[ ! -e "$FILE" ]] && curl -sO https://cdn.jsdelivr.net/gh/fscarmen/tools/besttrace/$FILE
