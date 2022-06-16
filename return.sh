@@ -65,7 +65,7 @@ ASNORG_4=$(expr "$IP_4" : '.*asn_org\":\"\([^"]*\).*') &&
 PE_4=$(curl -sm5 ping.pe/$WAN_4) &&
 COOKIE_4=$(echo $PE_4 | sed "s/.*document.cookie=\"\([^;]\{1,\}\).*/\1/g") &&
 TYPE_4=$(curl -sm5 --header "cookie: $COOKIE_4" ping.pe/$WAN_4 | grep "id='page-div'" | sed "s/.*\[\(.*\)\].*/\1/g" | sed "s/.*orange'>\([^<]\{1,\}\).*/\1/g" | sed "s/hosting/数据中心/g;s/residential/家庭宽带/g") &&
-green " IPv4: $WAN_4\t 地区: $COUNTRY_4\t ASN: $ASNORG_4\t 类型: $TYPE_4\n"
+green " IPv4: $WAN_4\t\t 地区: $COUNTRY_4\t 类型: $TYPE_4\t ASN: $ASNORG_4\n"
   
 IP_6=$(curl -s6m5 https:/ip.gs/json) &&
 WAN_6=$(expr "$IP_6" : '.*ip\":\"\([^"]*\).*') &&
@@ -75,7 +75,7 @@ ASNORG_6=$(expr "$IP_6" : '.*asn_org\":\"\([^"]*\).*') &&
 PE_6=$(curl -sm5 ping6.ping.pe/$WAN_6) &&
 COOKIE_6=$(echo $PE_6 | sed "s/.*document.cookie=\"\([^;]\{1,\}\).*/\1/g") &&
 TYPE_6=$(curl -sm5 --header "cookie: $COOKIE_6" ping6.ping.pe/$WAN_6 | grep "id='page-div'" | sed "s/.*\[\(.*\)\].*/\1/g" | sed "s/.*orange'>\([^<]\{1,\}\).*/\1/g" | sed "s/hosting/数据中心/g;s/residential/家庭宽带/g") &&
-green " IPv6: $WAN_6\t 地区: $COUNTRY_6\t ASN: $ASNORG_6\t 类型: $TYPE_6\n"
+green " IPv6: $WAN_6\t 地区: $COUNTRY_6\t 类型: $TYPE_6\t ASN: $ASNORG_6\n"
 
 [[ ! -e "$FILE" ]] && curl -sO https://cdn.jsdelivr.net/gh/fscarmen/tools/besttrace/$FILE
 chmod +x "$FILE" >/dev/null 2>&1
