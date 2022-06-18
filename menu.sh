@@ -1603,7 +1603,8 @@ proxy(){
 			wait
 			dpkg -i Client_${SYSTEM}_${VERSION_ID}.deb >/dev/null 2>&1
 			${PACKAGE_INSTALL[int]} -f
-			${PACKAGE_INSTALL[int]} gnupg desktop-file-utils
+			${PACKAGE_UPDATE[int]}
+			${PACKAGE_INSTALL[int]} gnupg2 desktop-file-utils
 			dpkg -i Client_${SYSTEM}_${VERSION_ID}.deb
 			rm -f Client_${SYSTEM}_${VERSION_ID}.deb
 			sleep 1
