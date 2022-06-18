@@ -1568,7 +1568,7 @@ proxy(){
 	input_license
 	[[ $LUBAN != 1 ]] && input_port
 	start=$(date +%s)
-	VERSION_ID=$(grep -i VERSION_ID /etc/os-release | cut -d \" -f2 | sed "s/22.04/20.04/g")
+	VERSION_ID=$(grep -i VERSION_ID /etc/os-release | cut -d \" -f2)
 	mkdir -p /etc/wireguard/ >/dev/null 2>&1
 	if [[ $CLIENT = 0 ]]; then green " ${T[${L}83]} "
 		if [[ $SYSTEM = CentOS ]]; then
