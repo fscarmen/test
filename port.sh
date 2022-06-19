@@ -14,5 +14,5 @@ ALL=$(wget -qO- --header="cookie: $TOKEN" https://tcp$STACK.ping.pe/ajax_getPing
 AREA=($(echo $ALL | python3 -m json.tool | grep CN_ | cut -d \" -f4))
 RESULT=($(echo $ALL | python3 -m json.tool | grep -A 2 CN_ | grep result | sed "s#[\":, ]##g"))
 
-echo -e "地方\tISP\t状态"
-for ((i=0;i<${#AREA[@]};i++)); do echo -e "$(eval echo "\$${AREA[i]}")\t$(eval echo "\$${RESULT[i]}")"; done
+echo -e "地方\tISP\t\t状态"
+for ((i=0;i<${#AREA[@]};i++)); do echo -e "$(eval echo "\$${AREA[i]}")\t\t$(eval echo "\$${RESULT[i]}")"; done
