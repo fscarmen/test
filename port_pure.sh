@@ -24,5 +24,5 @@ echo -e "地方\tISP\t状态"
 for ((i=0;i<${#NODE_ID[@]};i++)); do
   RESULT[i]=$(echo $ALL | python3 -m json.tool | grep -A 2 ${NODE_ID[i]} | grep result | sed "s#[\":, ]##g")
   RESULT[i]=${RESULT[i]:-'result1'}
-  echo -e "$(eval echo "\$${AREA[i]}")\t$(eval echo "\$${RESULT[i]}")"
+  echo -e "${NODE_ZH[i]}\t$(eval echo "\$${RESULT[i]}")"
 done
