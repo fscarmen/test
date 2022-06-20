@@ -21,7 +21,6 @@ done
 
 echo -e "| 状态 | 地方 | ISP |"
 echo -e "|-----|-----|-----|"
-https://stackoverflow.com/questions/49345960/how-do-i-send-tables-with-telegram-bot-api
 for ((i=0;i<${#NODE_ID[@]};i++)); do
   RESULT[i]=$(echo $ALL | python3 -m json.tool | grep -A 2 ${NODE_ID[i]} | grep result | sed "s#[\":, ]##g")
   RESULT[i]=${RESULT[i]:-'result1'}
