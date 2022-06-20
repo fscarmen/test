@@ -5,8 +5,8 @@ yellow(){ echo -e "\033[33m\033[01m$1\033[0m"; }
 green(){ echo -e "\033[32m\033[01m$1\033[0m"; }
 reading(){ read -rp "$(green "$1")" "$2"; }
 
-green "\n 本脚说明：测端口状态:打开/关闭，核心服务: https://ping.pe/ ，请知悉！"
-[[ -z "$ip" || $ip = '[IP:PORT]' ]] && reading "\n 请填入 IPv4:PORT 或者 [IPv6]:PORT: " ip
+green "\n 本脚说明：测端口状态:打开/关闭，核心服务来自: https://ping.pe/ ，请知悉！"
+[[ -z "$ip" || $ip = '[IP:PORT]' ]] && reading "\n 请填入 IPv4:PORT 或者 [IPv6]:PORT, 端口不填默认为80: " ip
 [[ ! $ip =~ '.' ]] && STACK='6'
 yellow "\n 检测中，请稍等片刻。\n"
 
