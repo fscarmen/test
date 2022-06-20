@@ -19,9 +19,9 @@ until [[ $ALL =~ 'TW_1' ]]; do
   ALL=$(wget -qO- --header="cookie: $TOKEN" https://tcp$STACK.ping.pe/ajax_getPingResults_v2.php?stream_id=$STREAM_ID)
 done
 
-printf " %s\t%s\t%s\t\n" 状态 地方 ISP
+printf " %s\t\t%s\t\t%s\t\t\n" 状态 地方 ISP
 for ((i=0;i<${#NODE_ID[@]};i++)); do
   RESULT[i]=$(echo $ALL | python3 -m json.tool | grep -A 2 ${NODE_ID[i]} | grep result | sed "s#[\":, ]##g")
   RESULT[i]=${RESULT[i]:-'result1'}
-  printf " %s\t%s\t%s\t\n" $(eval echo "\$${RESULT[i]}") ${NODE_ZH[i]}
+  printf " %s\t\t%s\t\t%s\t\t\n" $(eval echo "\$${RESULT[i]}") ${NODE_ZH[i]}
 done
