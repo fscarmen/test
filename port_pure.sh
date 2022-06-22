@@ -19,8 +19,7 @@ until [[ $ALL =~ 'TW_1' ]]; do
   ALL=$(wget -qO- --header="cookie: $TOKEN" https://tcp$STACK.ping.pe/ajax_getPingResults_v2.php?stream_id=$STREAM_ID)
 done
 
-echo $ALL
-[[ $ALL = '[]' ]] && printf "获取不了数据，请输入正确的格式: IPv4:port, [IPv6]:port, 域名:port\n"
+[ -z "$ALL" ] && printf "获取不了数据，请输入正确的格式: IPv4:port, [IPv6]:port, 域名:port\n" && exit 1
 printf "%-10s %-10s %-10s\n" 状态 地方 ISP
 for ((i=0;i<${#NODE_ID[@]};i++)); do
   RESULT[i]=$(echo $ALL | python3 -m json.tool | grep -A 2 ${NODE_ID[i]} | grep result | sed "s#[\":, ]##g")
